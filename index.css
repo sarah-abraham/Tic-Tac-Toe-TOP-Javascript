@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playwrite+NL:wght@100..400&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-ele{
+    width: 20vw;
+    height: 30vh;
+    font-size: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "caveat",system-ui, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 900;
+   
+}
+
+.top-middle-left-side{
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
+}
+
+.right-edge{
+    border-bottom: 5px solid black;
+}
+
+.bottom-edge{
+    border-right: 5px solid black;
+}
