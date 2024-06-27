@@ -1,7 +1,7 @@
 let gridElement = document.querySelectorAll(".grid-ele");
-let resetBtn = document.querySelector(".reset-btn");
+const resetBtn = document.querySelector(".reset-btn");
 let resultContainer = document.querySelector(".result-container");
-let resultText = document.createElement("p");
+let resultText = document.querySelector(".result-text");
 function Gameboard(){
     let gameboard = [1,2,3,4,5,6,7,8,9];
     function setGameboard(ind, symbol){
@@ -74,12 +74,10 @@ function win(){
     function checkWinner(){
         if(checkWinningCombo(p1score)){
             resultText.textContent = "Player 1 wins the game!";
-            resultContainer.appendChild(resultText);
             return true;
         }
         else if(checkWinningCombo(p2score)){
             resultText.textContent = "Player 2 wins the game!";
-            resultContainer.appendChild(resultText);
             return true;
         }
         return false;

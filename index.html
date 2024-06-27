@@ -7,21 +7,67 @@
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
+    <div class="page-title">
+        <h1> Tic-Tac-Toe</h1>
+    </div>
     <div class="container">
-        <div class="grid-container">
-            <div class="grid-ele top-middle-left-side" id="1">  </div>
-            <div class="grid-ele top-middle-left-side" id="2">  </div>
-            <div class="grid-ele right-edge" id="3">  </div>
-            <div class="grid-ele top-middle-left-side" id="4">  </div>
-            <div class="grid-ele top-middle-left-side" id="5">  </div>
-            <div class="grid-ele right-edge" id="6">  </div>
-            <div class="grid-ele bottom-edge" id="7"> </div>
-            <div class="grid-ele bottom-edge" id="8">  </div>
-            <div class="grid-ele" id="9">  </div>
+        <div class=grid-and-reset-container>
+            <div class="name-form">
+                <div class="name-container">
+                    <label for="p1-name">Enter first player's name</label>
+                    <input type="text" class="name-textbox" name="p1-name" id="p1-name">
+                </div>
+              
+                <div class="radio-btn-container">
+                    <label for="p1-symbol"> Enter first player's symbol</label>
+                    <div class="radio-btn">
+                        <input type="radio" name="p1-symbol" id="x-p1" value="X">
+                        <label for="x-p1"> X </label>
+                        <input type="radio" name="p1-symbol" id="o-p1" value="O">
+                        <label for="o-p1"> O </label>
+                    </div>
+                </div>
+                
+    
+                <div class="name-container">
+                    <label for="p2-name">Enter second player's name</label>
+                    <input type="text" class="name-textbox" name="p2-name" id="p2-name">
+                </div>
+                <div class="radio-btn-container">
+                    <label for="p2-symbol"> Enter second player's symbol</label>
+                    <div class="radio-btn">
+                        <input type="radio" name="p1-symbol" id="x-p1" value="X">
+                        <label for="x-p2"> X </label>
+                        <input type="radio" name="p1-symbol" id="o-p1" value="O">
+                        <label for="o-p2"> O </label>
+                    </div>  
+                </div>
+    
+                <button type="button" class="start-btn">Start</button>
+            </div>
+            <div class="grid-container">
+                <div class="grid-ele top-middle-left-side" id="1">  </div>
+                <div class="grid-ele top-middle-left-side" id="2">  </div>
+                <div class="grid-ele right-edge" id="3">  </div>
+                <div class="grid-ele top-middle-left-side" id="4">  </div>
+                <div class="grid-ele top-middle-left-side" id="5">  </div>
+                <div class="grid-ele right-edge" id="6">  </div>
+                <div class="grid-ele bottom-edge" id="7"> </div>
+                <div class="grid-ele bottom-edge" id="8">  </div>
+                <div class="grid-ele" id="9">  </div>
+            </div>
+            <div class="reset-turn-container">
+                
+                <button type="button" class="reset-btn">Reset </button>
+            </div>
         </div>
+        
         <div class="result-container">
-            <button type="button" class="reset-btn">Reset </button>
+            <p class="result-text turn-text"></p>
         </div>
+    </div>
+    
+
     </div>
 
     <script src="./index.js"></script>

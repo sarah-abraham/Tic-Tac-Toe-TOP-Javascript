@@ -4,15 +4,61 @@
     padding: 0px;
     box-sizing: border-box;
 }
-
+body{
+    overflow: hidden;
+    font-family: "Varela", system-ui, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.page-title{
+    width: 100vw;
+    border-bottom: 2px solid grey;
+    box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.page-title h1{
+    font-weight: 700;
+    text-align: center;
+    font-size: 4rem;
+    padding: 1%;
+}
 .container{
+    background-color: #d1d5db;
+    height: 85vh;
+    font-weight: 500;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5%;
-    padding: 3%;
+    flex-direction: column;
 }
 
+.grid-and-reset-container{
+    display: flex;
+    align-items: center;
+    gap: 2%;
+}
+
+.name-form{
+    display: flex;
+    flex-direction: column; 
+    margin: 6%;
+    margin-right: 7%;
+    gap: 3vh;
+}
+.name-container{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.name-textbox{
+    width: 20vw;
+    font-size: 1.5rem;
+    padding: 2%;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+.radio-btn{
+    display: flex;
+    gap: 5px;
+}
 
 .grid-container{
     display: grid;
@@ -20,12 +66,14 @@
     grid-template-rows: 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
+    
+    margin-right: 10%;
 }
 
 .grid-ele{
-    width: 20vw;
-    height: 30vh;
-    font-size: 10rem;
+    width: 10vw;
+    height: 20vh;
+    font-size: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,14 +83,34 @@
 }
 
 .top-middle-left-side{
-    border-right: 5px solid black;
-    border-bottom: 5px solid black;
+    border-right: 8px solid black;
+    border-bottom: 8px solid black;
 }
 
 .right-edge{
-    border-bottom: 5px solid black;
+    border-bottom: 8px solid black;
 }
 
 .bottom-edge{
-    border-right: 5px solid black;
+    border-right: 8px solid black;
 }
+
+.result-container{
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+
+
+.reset-turn-container button, .name-form button{
+    width: 10vw;
+    height: 8vh;
+    padding: 3%;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-radius: 15px;
+    background-color: black;
+    color: white
+}
+
