@@ -1,7 +1,14 @@
 let gridElement = document.querySelectorAll(".grid-ele");
 const resetBtn = document.querySelector(".reset-btn");
 let resultContainer = document.querySelector(".result-container");
-let resultText = document.querySelector(".result-text");
+let resultAndTurnText = document.querySelector(".result-turn-text");
+const startBtn = document.querySelector(".start-btn");
+const p1Name = document.querySelector("#p1-name");
+const p1Symbol = document.querySelectorAll('input[name="p1-symbol"]');
+const p2Name = document.querySelector("#p2-name");
+const p2Symbol = document.querySelectorAll('input[name="p2-symbol"]');
+const playerForm = document.querySelector(".player-form");
+let resultFlag = 0, playFlag = 0;
 function Gameboard(){
     let gameboard = [1,2,3,4,5,6,7,8,9];
     function setGameboard(ind, symbol){
@@ -73,11 +80,13 @@ function win(){
     }
     function checkWinner(){
         if(checkWinningCombo(p1score)){
-            resultText.textContent = "Player 1 wins the game!";
+            resultAndTurnText.textContent = "Player 1 wins the game!";
+            resultFlag = 1;
             return true;
         }
         else if(checkWinningCombo(p2score)){
-            resultText.textContent = "Player 2 wins the game!";
+            resultAndTurnText.textContent = "Player 2 wins the game!";
+            resultFlag = 1;
             return true;
         }
         return false;
@@ -92,7 +101,8 @@ function tie(){
     }
     function checkTie(){
         if(count===9){
-            alert("It's a tie")
+            resultAndTurnText.textContent = "It's a tie";
+            resultFlag = 1;
             return true;
         }
         return false;
@@ -104,9 +114,49 @@ function clearGrid(){
     location.reload();
 }
 
+function validation(){
+    console.log("validating");
+    let radioValue1, radioValue2;
+    let radio1flag = 1, radio2flag = 1;
+    p1Symbol.forEach(element => {
+        if(element.checked){
+            radioValue1 = element.value;
+            radio1flag = 0;
+        }
+    })
+    p2Symbol.forEach(element => {
+        if(element.checked){
+            radioValue2 = element.value;
+            radio2flag = 0;
+        }
+    })
 
-const p1 = players(1, "Alice", "X");
-const p2 = players(2, "Bob", "O");
+    if(!p1Name.value){
+        alert("Enter player 1's name");
+        return false;
+    }
+    else if(!p2Name.value === ""){
+        alert("Enter player 2's name")
+        return false;
+    }
+    else if(radio1flag === 1){
+        alert("Please choose a symbol for player 1");
+        return false;
+    }
+    else if(radio2flag === 1){
+        alert("Please choose a symbol for player 2");
+        return false;
+    }
+    else if(radioValue1 === radioValue2){
+        alert("Players cannot choose same symbol");
+        return false;
+    }
+    
+    return true;
+}
+
+let p1;
+let p2;
 const winObj = win();
 const tieObj = tie();
 let last = p2;
@@ -117,26 +167,74 @@ let playGameResponseFlag;
 
 
 let i = 1;
-gridElement.forEach(element => {element.addEventListener('click', (event) => {
-    console.log(i);
-    console.log(parseInt(event.target.id));
-    if(i%2!=0){
-        playGameResponseFlag = playGame(gb, parseInt(event.target.id), p1, winObj, tieObj);
-        if(playGameResponseFlag === true){
-            element.textContent = p1.symbol;
-            i++;
-        }
+
+
+startBtn.addEventListener('click', () => {
+    if(!validation()){
+        console.log("not in here")
+        return;
     }
-    else{
-        playGameResponseFlag = playGame(gb, parseInt(event.target.id), p2, winObj, tieObj);
-        if(playGameResponseFlag === true){
-            element.textContent = p2.symbol;
-            i++;
+    playFlag = 1;
+    p1Symbol.forEach((radio) => {
+        if (radio.checked) {
+            p1SymbolValue = radio.value;
+            radio.checked = false;
         }
-    }
-})})
+    });
+    p2Symbol.forEach((radio) => {
+        if (radio.checked) {
+            p2SymbolValue = radio.value;
+            radio.checked = false;
+        }
+    });
+    p1 = players(1, p1Name.value, p1SymbolValue);
+    console.log(p1);
+    p2 = players(2, p2Name.value, p2SymbolValue);
+    console.log(p2);
+    
+    playerForm.style.visibility = 'hidden';
+    resultAndTurnText.textContent = p1.name + "'s turn now.";
+
+})
+
+
+    gridElement.forEach(element => {
+        element.addEventListener('click', (event) => {
+        console.log(i);
+        console.log(parseInt(event.target.id));
+        if(playFlag === 1){
+            if(i%2!=0){
+                playGameResponseFlag = playGame(gb, parseInt(event.target.id), p1, winObj, tieObj);
+                if(playGameResponseFlag === true){
+                    if(resultFlag === 0){
+                        resultAndTurnText.textContent = p2.name + "'s turn now.";
+                    }
+        
+                    element.textContent = p1.symbol;
+                    i++;
+                }
+            }
+            else{
+                
+                playGameResponseFlag = playGame(gb, parseInt(event.target.id), p2, winObj, tieObj);
+                
+                if(playGameResponseFlag === true){
+                    if(resultFlag === 0){
+                        resultAndTurnText.textContent = p1.name + "'s turn now.";
+                    }
+                  
+                    element.textContent = p2.symbol;
+                    i++;
+                }
+            }
+        }
+        
+    })})
+    
+
 
 resetBtn.addEventListener('click', () => {
     clearGrid();
 })
+
 

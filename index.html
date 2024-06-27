@@ -12,7 +12,7 @@
     </div>
     <div class="container">
         <div class=grid-and-reset-container>
-            <div class="name-form">
+            <div class="player-form">
                 <div class="name-container">
                     <label for="p1-name">Enter first player's name</label>
                     <input type="text" class="name-textbox" name="p1-name" id="p1-name">
@@ -36,9 +36,9 @@
                 <div class="radio-btn-container">
                     <label for="p2-symbol"> Enter second player's symbol</label>
                     <div class="radio-btn">
-                        <input type="radio" name="p1-symbol" id="x-p1" value="X">
+                        <input type="radio" name="p2-symbol" id="x-p1" value="X">
                         <label for="x-p2"> X </label>
-                        <input type="radio" name="p1-symbol" id="o-p1" value="O">
+                        <input type="radio" name="p2-symbol" id="o-p1" value="O">
                         <label for="o-p2"> O </label>
                     </div>  
                 </div>
@@ -63,7 +63,8 @@
         </div>
         
         <div class="result-container">
-            <p class="result-text turn-text"></p>
+            <p class="result-turn-text"></p>
+            <p class="warning-text"></p>
         </div>
     </div>
     
