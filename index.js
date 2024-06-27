@@ -135,7 +135,7 @@ function validation(){
         alert("Enter player 1's name");
         return false;
     }
-    else if(!p2Name.value === ""){
+    else if(!p2Name.value){
         alert("Enter player 2's name")
         return false;
     }
