@@ -1,3 +1,7 @@
+let gridElement = document.querySelectorAll(".grid-ele");
+let resetBtn = document.querySelector(".reset-btn");
+let resultContainer = document.querySelector(".result-container");
+let resultText = document.createElement("p");
 function Gameboard(){
     let gameboard = [1,2,3,4,5,6,7,8,9];
     function setGameboard(ind, symbol){
@@ -23,37 +27,30 @@ function Gameboard(){
     return {setGameboard,viewGameboard}
 }
 
-function players(name, symbol){
-    return {name, symbol};
+function players(id, name, symbol){
+    return {id, name, symbol};
 }
 
-function playGame(gb, p1, p2){
-    const p1_choice = p1["symbol"];
-    const p2_choice = p2["symbol"];
-    const winObj = win();
-    const tieObj = tie();
-    let move1, move2;
-    while(!winObj.checkWinner() && !tieObj.checkTie()){
-        flag=false;
-        while(!flag){
-            move1=parseInt(prompt("Player 1: Enter the number on the board on which you want to place your symbol"));
-            flag=gb.setGameboard(move1-1, p1_choice);
-        }
-        winObj.updateP1Score(move1);
-        tieObj.updateCount();
-        gb.viewGameboard();
-        if(winObj.checkWinner() ||  tieObj.checkTie()){ break;}
-        
-        flag=false;
-        while(!flag){
-            move2=parseInt(prompt("Player 2: Enter the number on the board on which you want to place your symbol"));
-            flag=gb.setGameboard(move2-1, p2_choice);
-        }
-        winObj.updateP2Score(move2);
-        tieObj.updateCount();
-        gb.viewGameboard();
-        if(winObj.checkWinner() ||  tieObj.checkTie()){ break;}
+function playGame(gb, move, player, winObj, tieObj){
+    flag = gb.setGameboard(move-1, player.symbol);
+    if(flag === false){
+        return false;
     }
+
+
+    if(player.id === 1){
+        winObj.updateP1Score(move);
+    }
+    else{
+        winObj.updateP2Score(move);
+    }
+    
+    tieObj.updateCount();
+    gb.viewGameboard();
+    if(winObj.checkWinner() ||  tieObj.checkTie()){ 
+        return true;
+        ;}
+    return true;
 }
 
 function win(){
@@ -76,11 +73,13 @@ function win(){
     }
     function checkWinner(){
         if(checkWinningCombo(p1score)){
-            alert("Player 1 wins!");
+            resultText.textContent = "Player 1 wins the game!";
+            resultContainer.appendChild(resultText);
             return true;
         }
         else if(checkWinningCombo(p2score)){
-            alert("Player 2 wins!");
+            resultText.textContent = "Player 2 wins the game!";
+            resultContainer.appendChild(resultText);
             return true;
         }
         return false;
@@ -103,18 +102,43 @@ function tie(){
     return {updateCount, checkTie}
 }
 
-
-// const p1 = players("Alice", "X");
-// const p2 = players("Bob", "O");
-// const gb = Gameboard();
-// console.log(p1);
-// console.log(p2);
-// gb.viewGameboard();
-// playGame(gb, p1, p2);
+function clearGrid(){
+    location.reload();
+}
 
 
-let gridElement = document.querySelectorAll(".grid-ele");
-gridElement.forEach(element => {element.addEventListener('click', () => {
-    element.textContent = "X";
-    console.log("AHA");
+const p1 = players(1, "Alice", "X");
+const p2 = players(2, "Bob", "O");
+const winObj = win();
+const tieObj = tie();
+let last = p2;
+const gb = Gameboard();
+let playGameResponseFlag;
+
+
+
+
+let i = 1;
+gridElement.forEach(element => {element.addEventListener('click', (event) => {
+    console.log(i);
+    console.log(parseInt(event.target.id));
+    if(i%2!=0){
+        playGameResponseFlag = playGame(gb, parseInt(event.target.id), p1, winObj, tieObj);
+        if(playGameResponseFlag === true){
+            element.textContent = p1.symbol;
+            i++;
+        }
+    }
+    else{
+        playGameResponseFlag = playGame(gb, parseInt(event.target.id), p2, winObj, tieObj);
+        if(playGameResponseFlag === true){
+            element.textContent = p2.symbol;
+            i++;
+        }
+    }
 })})
+
+resetBtn.addEventListener('click', () => {
+    clearGrid();
+})
+

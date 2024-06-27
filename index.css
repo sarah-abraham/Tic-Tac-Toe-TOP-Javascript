@@ -5,14 +5,16 @@
     box-sizing: border-box;
 }
 
-body{
+.container{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5%;
     padding: 3%;
 }
 
-.container{
+
+.grid-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
