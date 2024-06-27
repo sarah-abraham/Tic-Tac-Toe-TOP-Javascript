@@ -80,12 +80,12 @@ function win(){
     }
     function checkWinner(){
         if(checkWinningCombo(p1score)){
-            resultAndTurnText.textContent = "Player 1 wins the game!";
+            resultAndTurnText.textContent = p1.name+" wins the game!";
             resultFlag = 1;
             return true;
         }
         else if(checkWinningCombo(p2score)){
-            resultAndTurnText.textContent = "Player 2 wins the game!";
+            resultAndTurnText.textContent = p2.name+" wins the game!";
             resultFlag = 1;
             return true;
         }
